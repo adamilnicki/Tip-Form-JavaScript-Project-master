@@ -7,14 +7,17 @@ let personAmount = document.querySelector("#person-amount");
 
 let serviceOptions = [
   {
+    quality:"Bad",
     tip: "2%",
     value: 0.02,
   },
   {
+    quality:"Good",
     tip: "10%",
     value: 0.1,
   },
   {
+    quality:"Great",
     tip: "20%",
     value: 0.2,
   }
@@ -22,14 +25,14 @@ let serviceOptions = [
 
 function addElement() {
   let service = document.querySelector("#input-service");
-  let option = document.createElement("option");
+  // let option = document.createElement("option");
   // for (let i = 0; i < serviceOptions.length; i++) {
   //   option.value = serviceOptions[i]["value"];
   //   option.innerHTML = serviceOptions[i]["tip"];
   //   service.appendChild(option);
   // }
-  for (let i = 0; i < serviceOptions.length; i++) {
-      service.options.add(new Option(serviceOptions[i]['tip'],serviceOptions[i]['value']))
+  for (let i = serviceOptions.length-1; i >= 0; i--) {
+      service.options.add(new Option(`${serviceOptions[i]['quality']} - ${serviceOptions[i]['tip']}`,serviceOptions[i]['value']))
   }
 
 }
