@@ -7,20 +7,20 @@ let personAmount = document.querySelector("#person-amount");
 
 let serviceOptions = [
   {
-    quality:"Bad",
+    quality: "Bad",
     tip: "2%",
     value: 0.02,
   },
   {
-    quality:"Good",
+    quality: "Good",
     tip: "10%",
     value: 0.1,
   },
   {
-    quality:"Great",
+    quality: "Great",
     tip: "20%",
     value: 0.2,
-  }
+  },
 ];
 
 function addElement() {
@@ -31,12 +31,15 @@ function addElement() {
   //   option.innerHTML = serviceOptions[i]["tip"];
   //   service.appendChild(option);
   // }
-  for (let i = serviceOptions.length-1; i >= 0; i--) {
-      service.options.add(new Option(`${serviceOptions[i]['quality']} - ${serviceOptions[i]['tip']}`,serviceOptions[i]['value']))
+  for (let i = serviceOptions.length - 1; i >= 0; i--) {
+    service.options.add(
+      new Option(
+        `${serviceOptions[i]["quality"]} - ${serviceOptions[i]["tip"]}`,
+        serviceOptions[i]["value"]
+      )
+    );
   }
-
 }
-let results = document.querySelector(".results");
 
 function calculate(billCalc, usersCalc, serviceCalc) {
   billCalc = parseInt(billCalc);
@@ -54,7 +57,13 @@ function calculate(billCalc, usersCalc, serviceCalc) {
 
 submitBtn.addEventListener("click", function (event) {
   event.preventDefault();
-  results.style.display = "block";
+  let results = document.querySelector(".results");
+  let loader = document.querySelector(".loader");
+  loader.style.display = "block";
+  setTimeout(function () {
+    loader.style.display = "none";
+    results.style.display = "block";
+  }, 2000);
   let bill = document.querySelector("#input-bill").value;
   let users = document.querySelector("#input-users").value;
   let service = document.querySelector("#input-service").value;
@@ -64,4 +73,8 @@ submitBtn.addEventListener("click", function (event) {
   tipAmount.innerHTML = calc[0].toFixed(2);
   totalAmount.innerHTML = calc[1].toFixed(2);
   personAmount.innerHTML = calc[2].toFixed(2);
+  setTimeout(function () {
+    results.style.display = "none";
+    document.querySelector("#tip-form").reset();
+  }, 8000);
 });
